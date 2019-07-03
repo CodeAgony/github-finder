@@ -14,11 +14,11 @@ export class UserItem extends Component {
 
 	render() {
 		return (
-			<div className="card text-center">
+			<div className='card text-center'>
 				<img
 					src={this.state.avatar_url}
-					alt=""
-					className="round-img"
+					alt=''
+					className='round-img'
 					style={{ width: 60 }}
 				/>
 			</div>
