@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class UserItem extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			id: 'id',
-			login: 'mojombo',
-			avatar_url: 'https://avatars0.githubusercontent.com/u/1?v=4',
-			html_url: 'https://github.com/mojombo'
-		};
-	}
+	static propTypes = {
+		user: PropTypes.object.isRequired
+	};
 
 	render() {
-		const { avatar_url, login, html_url } = this.state;
+		const { login, avatar_url, html_url } = this.props.user;
 		return (
 			<div className='card text-center'>
 				<img
