@@ -14,7 +14,7 @@ const Users = ({ users, loading }) => {
 				))}
 			</div>
 		);
-}
+	}
 };
 
 const userStyle = {
