@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserItem from './UserItem';
-const Users = ({users}) => {
+import Spinner from '../layout/Spinner';
+
+const Users = ({ users, loading }) => {
+	if (loading) {
+		return <Spinner />;
+	} else {
 		return (
 			<div style={userStyle}>
 				{users.map(user => (
@@ -10,6 +15,7 @@ const Users = ({users}) => {
 			</div>
 		);
 }
+};
 
 const userStyle = {
 	display: 'grid',
