@@ -10,9 +10,12 @@ export class Search extends Component {
 
 	onSubmit = e => {
 		e.preventDefault();
-		// eslint-disable-next-line react/prop-types
-		this.props.searchUsers(this.state.text);
-		this.setState({ text: '' });
+		if (this.state.text === '') {
+			this.props.setAlert('Please enter your search query', 'light');
+		} else {
+			this.props.searchUsers(this.state.text);
+			this.setState({ text: '' });
+		}
 	};
 
 	render() {
@@ -46,7 +49,8 @@ export class Search extends Component {
 Search.propTypes = {
 	searchUsers: PropTypes.func.isRequired,
 	clearUsers: PropTypes.func.isRequired,
-	isFull: PropTypes.bool.isRequired
+	isFull: PropTypes.bool.isRequired,
+	setAlert: PropTypes.func.isRequired
 };
 
 export default Search;
