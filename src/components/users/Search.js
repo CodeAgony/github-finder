@@ -16,6 +16,8 @@ export class Search extends Component {
 	};
 
 	render() {
+		const { clearUsers, isFull } = this.props;
+
 		return (
 			<div>
 				<form className='form' onSubmit={this.onSubmit}>
@@ -31,11 +33,8 @@ export class Search extends Component {
 						className='btn btn-dark btn-block'
 					/>
 				</form>
-				{this.props.isFull && (
-					<button
-						className='btn btn-light btn-block'
-						onClick={this.props.clearUsers}
-					>
+				{isFull && (
+					<button className='btn btn-light btn-block' onClick={clearUsers}>
 						Clear
 					</button>
 				)}
