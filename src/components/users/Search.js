@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
 	state = {
@@ -15,6 +16,8 @@ export class Search extends Component {
 	};
 
 	render() {
+		const { clearUsers, isFull } = this.props;
+
 		return (
 			<div>
 				<form className='form' onSubmit={this.onSubmit}>
@@ -30,9 +33,20 @@ export class Search extends Component {
 						className='btn btn-dark btn-block'
 					/>
 				</form>
+				{isFull && (
+					<button className='btn btn-light btn-block' onClick={clearUsers}>
+						Clear
+					</button>
+				)}
 			</div>
 		);
 	}
 }
+
+Search.propTypes = {
+	searchUsers: PropTypes.func.isRequired,
+	clearUsers: PropTypes.func.isRequired,
+	isFull: PropTypes.bool.isRequired
+};
 
 export default Search;
