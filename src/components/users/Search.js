@@ -31,12 +31,14 @@ export class Search extends Component {
 						className='btn btn-dark btn-block'
 					/>
 				</form>
-				<button
-					className='btn btn-light btn-block'
-					onClick={this.props.clearUsers}
-				>
-					Clear
-				</button>
+				{this.props.isFull && (
+					<button
+						className='btn btn-light btn-block'
+						onClick={this.props.clearUsers}
+					>
+						Clear
+					</button>
+				)}
 			</div>
 		);
 	}
@@ -44,7 +46,8 @@ export class Search extends Component {
 
 Search.propTypes = {
 	searchUsers: PropTypes.func.isRequired,
-	clearUsers: PropTypes.func.isRequired
+	clearUsers: PropTypes.func.isRequired,
+	isFull: PropTypes.bool.isRequired
 };
 
 export default Search;
