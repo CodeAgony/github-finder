@@ -9,7 +9,10 @@ export class User extends Component {
 		this.props.getUser(this.props.match.params.login);
 	}
 	render() {
-		return <div>User</div>;
+		const { loading } = this.props;
+
+		if (loading) return <Spinner />;
+
 		return <div> test </div>;
 	}
 }
