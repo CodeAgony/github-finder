@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-duplicate-props */
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
@@ -37,11 +38,11 @@ class App extends Component {
 	clearUsers = () => this.setState({ users: [], loading: false });
 
 	// Get single user
-	getUser = async username => {
+	getUser = async login => {
 		this.setState({ loading: true });
 
 		const res = await axios.get(
-			`https://api.github.com/users=${username}?client_id=${
+			`https://api.github.com/users/${login}?client_id=${
 				process.env.REACT_APP_GITHUB_CLIENT_ID
 			}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
 		);
@@ -85,11 +86,10 @@ class App extends Component {
 							<Route exact path='/about' component={About} />
 							<Route
 								exact
-								path='/user:login'
+								path='/user/:login'
 								render={props => (
 									<Fragment>
 										<User {...props} getUser={this.getUser} user={user} />
-										<Users loading={loading} users={users} loading={loading} />
 									</Fragment>
 								)}
 							/>
