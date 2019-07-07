@@ -10,6 +10,10 @@ export class User extends Component {
 		this.props.getUser(this.props.match.params.login);
 	}
 	render() {
+		const {
+			hireable
+		} = this.props.user;
+
 		const { loading } = this.props;
 
 		if (loading) return <Spinner />;
@@ -19,6 +23,12 @@ export class User extends Component {
 				<Link to='/' className='btn btn-light'>
 					Back to Search
 				</Link>
+				Hireable:{' '}
+				{hireable ? (
+					<i className='fas fa-check text-success' />
+				) : (
+					<i className='fas fa-times-circle text-danger' />
+				)}
 			</Fragment>
 		);
 	}
