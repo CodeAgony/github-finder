@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
+import { Link } from 'react-router-dom';
 
 export class User extends Component {
 	componentDidMount() {
@@ -13,7 +14,13 @@ export class User extends Component {
 
 		if (loading) return <Spinner />;
 
-		return <div> test </div>;
+		return (
+			<Fragment>
+				<Link to='/' className='btn btn-light'>
+					Back to Search
+				</Link>
+			</Fragment>
+		);
 	}
 }
 
