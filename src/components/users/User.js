@@ -11,6 +11,7 @@ export class User extends Component {
 	}
 	render() {
 		const {
+			avatar_url,
 			hireable
 		} = this.props.user;
 
@@ -29,6 +30,16 @@ export class User extends Component {
 				) : (
 					<i className='fas fa-times-circle text-danger' />
 				)}
+				<div className='card grid-2'>
+					<div className='all-center'>
+						<img
+							src={avatar_url}
+							className='round-img'
+							alt=''
+							style={{ width: '150px' }}
+						/>
+					</div>
+				</div>
 			</Fragment>
 		);
 	}
