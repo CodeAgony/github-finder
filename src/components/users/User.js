@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 export class User extends Component {
 	componentDidMount() {
 		this.props.getUser(this.props.match.params.login);
+		// Call this here to avoid prop drilling
+		this.props.getUserRepos(this.props.match.params.login);
 	}
 	render() {
 		const {
@@ -102,6 +104,7 @@ export class User extends Component {
 
 User.propTypes = {
 	getUser: PropTypes.func.isRequired,
+	getUserRepos: PropTypes.func.isRequired,
 	user: PropTypes.object.isRequired,
 	loading: PropTypes.bool
 };
