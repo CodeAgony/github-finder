@@ -35,9 +35,10 @@ const App = () => {
 	};
 
 	// Clear API response data from state
-	const clearUsers = () => setUsers([]);
-	// setLoading(false);
-
+	const clearUsers = () => {
+		setUsers([]);
+		setLoading(false);
+	};
 	// Get single user
 	const getUser = async login => {
 		setLoading(true);
