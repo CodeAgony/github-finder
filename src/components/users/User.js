@@ -11,11 +11,13 @@ const User = ({ getUserRepos, match, repos }) => {
 	const githubContext = useContext(GithubContext);
 
 	useEffect(() => {
-		githubContext.getUser(match.params.login);
+		getUser(match.params.login);
 		// Call this here to avoid prop drilling
 		getUserRepos(match.params.login);
 		// eslint-disable-next-line
 	}, []);
+
+	const { getUser, loading, user } = githubContext;
 
 	const {
 		name,
@@ -31,9 +33,9 @@ const User = ({ getUserRepos, match, repos }) => {
 		public_repos,
 		public_gists,
 		hireable
-	} = githubContext.user;
+	} = user;
 
-	if (githubContext.loading) return <Spinner />;
+	if (loading) return <Spinner />;
 
 	return (
 		<Fragment>
