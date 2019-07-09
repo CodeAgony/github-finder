@@ -13,24 +13,9 @@ import About from './components/pages/About';
 import GithubState from './context/github/GithubState';
 
 const App = () => {
-	const [user, setUser] = useState({});
 	const [repos, setRepos] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [alert, setAlert] = useState(null);
-
-	// Get single user
-	const getUser = async login => {
-		setLoading(true);
-
-		const res = await axios.get(
-			`https://api.github.com/users/${login}?client_id=${
-				process.env.REACT_APP_GITHUB_CLIENT_ID
-			}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-		);
-
-		setUser(res.data);
-		setLoading(false);
-	};
 
 	// Get user repositories
 	const getUserRepos = async login => {
@@ -80,9 +65,7 @@ const App = () => {
 									<Fragment>
 										<User
 											{...props}
-											getUser={getUser}
 											getUserRepos={getUserRepos}
-											user={user}
 											repos={repos}
 										/>
 									</Fragment>

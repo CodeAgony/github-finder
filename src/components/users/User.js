@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos';
 import { Link } from 'react-router-dom';
+import GithubContext from '../../context/github/githubContext';
 
-const User = ({ user, loading, getUser, getUserRepos, match, repos }) => {
+const User = ({ getUserRepos, match, repos }) => {
+	const githubContext = useContext(GithubContext);
+
 	useEffect(() => {
-		getUser(match.params.login);
+		githubContext.getUser(match.params.login);
 		// Call this here to avoid prop drilling
 		getUserRepos(match.params.login);
 		// eslint-disable-next-line
@@ -28,9 +31,9 @@ const User = ({ user, loading, getUser, getUserRepos, match, repos }) => {
 		public_repos,
 		public_gists,
 		hireable
-	} = user;
+	} = githubContext.user;
 
-	if (loading) return <Spinner />;
+	if (githubContext.loading) return <Spinner />;
 
 	return (
 		<Fragment>
@@ -103,10 +106,7 @@ const User = ({ user, loading, getUser, getUserRepos, match, repos }) => {
 };
 
 User.propTypes = {
-	getUser: PropTypes.func.isRequired,
-	getUserRepos: PropTypes.func.isRequired,
-	user: PropTypes.object.isRequired,
-	loading: PropTypes.bool
+	getUserRepos: PropTypes.func.isRequired
 };
 
 export default User;
