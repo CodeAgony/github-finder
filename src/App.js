@@ -13,17 +13,11 @@ import About from './components/pages/About';
 import GithubState from './context/github/GithubState';
 
 const App = () => {
-	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState({});
 	const [repos, setRepos] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [alert, setAlert] = useState(null);
 
-	// Clear API response data from state
-	const clearUsers = () => {
-		setUsers([]);
-		setLoading(false);
-	};
 	// Get single user
 	const getUser = async login => {
 		setLoading(true);
@@ -73,12 +67,8 @@ const App = () => {
 								path='/'
 								render={props => (
 									<Fragment>
-										<Search
-											clearUsers={clearUsers}
-											isFull={users.length > 0 ? true : false}
-											setAlert={showAlert}
-										/>
-										<Users loading={loading} users={users} />
+										<Search setAlert={showAlert} />
+										<Users />
 									</Fragment>
 								)}
 							/>

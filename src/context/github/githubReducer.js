@@ -1,7 +1,7 @@
 import {
 	SEARCH_USERS,
 	SET_LOADING,
-	CLEAR_USER,
+	CLEAR_USERS,
 	GET_USER,
 	GET_REPOS
 } from '../types';
@@ -17,6 +17,12 @@ export default (state, action) => {
 		return {
 			...state,
 			users: action.payload,
+			loading: false
+		};
+	case CLEAR_USERS:
+		return {
+			...state,
+			users: [],
 			loading: false
 		};
 	default:
