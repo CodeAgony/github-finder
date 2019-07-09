@@ -10,6 +10,7 @@ import User from './components/users/User';
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import About from './components/pages/About';
+import GithubState from './context/github/GithubState';
 
 const App = () => {
 	const [users, setUsers] = useState([]);
@@ -76,47 +77,49 @@ const App = () => {
 	};
 
 	return (
-		<Router>
-			<div className='App'>
-				<Navbar title='Github Finder' icon='fab fa-github' />
-				<div className='container'>
-					<Alert alert={alert} />
-					<Switch>
-						<Route
-							exact
-							path='/'
-							render={props => (
-								<Fragment>
-									<Search
-										searchUsers={searchUsers}
-										clearUsers={clearUsers}
-										isFull={users.length > 0 ? true : false}
-										setAlert={showAlert}
-									/>
-									<Users loading={loading} users={users} />
-								</Fragment>
-							)}
-						/>
-						<Route exact path='/about' component={About} />
-						<Route
-							exact
-							path='/user/:login'
-							render={props => (
-								<Fragment>
-									<User
-										{...props}
-										getUser={getUser}
-										getUserRepos={getUserRepos}
-										user={user}
-										repos={repos}
-									/>
-								</Fragment>
-							)}
-						/>
-					</Switch>
+		<GithubState>
+			<Router>
+				<div className='App'>
+					<Navbar title='Github Finder' icon='fab fa-github' />
+					<div className='container'>
+						<Alert alert={alert} />
+						<Switch>
+							<Route
+								exact
+								path='/'
+								render={props => (
+									<Fragment>
+										<Search
+											searchUsers={searchUsers}
+											clearUsers={clearUsers}
+											isFull={users.length > 0 ? true : false}
+											setAlert={showAlert}
+										/>
+										<Users loading={loading} users={users} />
+									</Fragment>
+								)}
+							/>
+							<Route exact path='/about' component={About} />
+							<Route
+								exact
+								path='/user/:login'
+								render={props => (
+									<Fragment>
+										<User
+											{...props}
+											getUser={getUser}
+											getUserRepos={getUserRepos}
+											user={user}
+											repos={repos}
+										/>
+									</Fragment>
+								)}
+							/>
+						</Switch>
+					</div>
 				</div>
-			</div>
-		</Router>
+			</Router>
+		</GithubState>
 	);
 };
 
