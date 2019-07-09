@@ -19,22 +19,6 @@ const App = () => {
 	const [loading, setLoading] = useState(false);
 	const [alert, setAlert] = useState(null);
 
-	// Get users from API based on search query
-	const searchUsers = async text => {
-		// Show the loading spinner while data is on the way
-		setLoading(true);
-
-		const res = await axios.get(
-			`https://api.github.com/search/users?q=${text}&client_id=${
-				process.env.REACT_APP_GITHUB_CLIENT_ID
-			}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-		);
-
-		// Store response in state and remove spinner
-		setUsers(res.data.items);
-		setLoading(false);
-	};
-
 	// Clear API response data from state
 	const clearUsers = () => {
 		setUsers([]);
@@ -90,7 +74,6 @@ const App = () => {
 								render={props => (
 									<Fragment>
 										<Search
-											searchUsers={searchUsers}
 											clearUsers={clearUsers}
 											isFull={users.length > 0 ? true : false}
 											setAlert={showAlert}

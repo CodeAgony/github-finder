@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import GithubContext from './githubContext';
@@ -21,6 +22,22 @@ const GithubState = props => {
 	const [state, dispatch] = useReducer(GithubReducer, initialState);
 
 	// Search users
+	const searchUsers = async text => {
+		// Show the loading spinner while data is on the way
+		setLoading(true);
+
+		const res = await axios.get(
+			`https://api.github.com/search/users?q=${text}&client_id=${
+				process.env.REACT_APP_GITHUB_CLIENT_ID
+			}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+		);
+
+		// Store response in state and remove spinner
+		dispatch({
+			type: SEARCH_USERS,
+			payload: res.data.items
+		});
+	};
 
 	// Get user
 
@@ -29,6 +46,7 @@ const GithubState = props => {
 	// Clear users
 
 	// Set loading
+	const setLoading = () => dispatch({ type: SET_LOADING });
 
 	return (
 		<GithubContext.Provider
@@ -36,7 +54,8 @@ const GithubState = props => {
 				users: state.users,
 				user: state.user,
 				repos: state.repos,
-				loading: state.loading
+				loading: state.loading,
+				searchUsers
 			}}
 		>
 			{props.children}
