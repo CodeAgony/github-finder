@@ -7,17 +7,16 @@ import Repos from '../repos/Repos';
 import { Link } from 'react-router-dom';
 import GithubContext from '../../context/github/githubContext';
 
-const User = ({ getUserRepos, match, repos }) => {
+const User = ({ match }) => {
 	const githubContext = useContext(GithubContext);
+
+	const { getUser, getUserRepos, loading, user, repos } = githubContext;
 
 	useEffect(() => {
 		getUser(match.params.login);
-		// Call this here to avoid prop drilling
 		getUserRepos(match.params.login);
 		// eslint-disable-next-line
 	}, []);
-
-	const { getUser, loading, user } = githubContext;
 
 	const {
 		name,
@@ -105,10 +104,6 @@ const User = ({ getUserRepos, match, repos }) => {
 			<Repos repos={repos} />
 		</Fragment>
 	);
-};
-
-User.propTypes = {
-	getUserRepos: PropTypes.func.isRequired
 };
 
 export default User;
